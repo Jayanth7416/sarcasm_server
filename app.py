@@ -9,6 +9,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
+import os
+import gdown
+import zipfile
+
+def download_and_extract_model():
+    if not os.path.exists("sarcasm_model"):
+        # Download the folder as a zip file
+        zip_path = "sarcasm_model.zip"
+        gdown.download(f"https://drive.google.com/file/d/1XYaRwxaqwRsC-VGPW6OqcfM3jP4PnvR5/view?usp=sharing", zip_path, quiet=False)
+        # Extract the zip file
+        with zipfile.ZipFile(zip_path, "r") as zip_ref:
+            zip_ref.extractall("sarcasm_model")
+        os.remove(zip_path)  # Cleanup the zip file after extraction
+
+# Call the function to download and set up the model
+download_and_extract_model()
+
+
 # Load the model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained("./sarcasm_model")
 model = AutoModelForSequenceClassification.from_pretrained("./sarcasm_model")
