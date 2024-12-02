@@ -2,13 +2,14 @@ import os
 import subprocess
 import sys
 
-# Function to install a package if not already installed
+
 def install_package(package_name):
     try:
         __import__(package_name)
     except ImportError:
         print(f"Installing {package_name}...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name, "--user"])
+
 
 # List of required packages
 required_packages = [
