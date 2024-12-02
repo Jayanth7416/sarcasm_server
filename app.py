@@ -1,3 +1,34 @@
+import os
+import subprocess
+import sys
+
+# Function to install a package if not already installed
+def install_package(package_name):
+    try:
+        __import__(package_name)
+    except ImportError:
+        print(f"Installing {package_name}...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
+
+# List of required packages
+required_packages = [
+    "streamlit",
+    "transformers",
+    "torch",
+    "shap",
+    "transformers-interpret",
+    "numpy",
+    "matplotlib",
+    "gdown",
+]
+
+# Install all required packages
+for package in required_packages:
+    try:
+        install_package(package)
+    except Exception as e:
+        print(f"Error installing {package}: {e}")
+
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
@@ -12,6 +43,8 @@ import matplotlib.colors as mcolors
 import os
 import gdown
 import zipfile
+
+
 
 def download_and_extract_model():
     if not os.path.exists("sarcasm_model"):
