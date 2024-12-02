@@ -6,3 +6,5 @@ transformers-interpret
 numpy
 matplotlib
 gdown
+tensorflow
+keras
