@@ -1,35 +1,3 @@
-import os
-import subprocess
-import sys
-
-
-def install_package(package_name):
-    try:
-        __import__(package_name)
-    except ImportError:
-        print(f"Installing {package_name}...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name, "--user"])
-
-
-# List of required packages
-required_packages = [
-    "streamlit",
-    "transformers",
-    "torch",
-    "shap",
-    "transformers-interpret",
-    "numpy",
-    "matplotlib",
-    "gdown",
-]
-
-# Install all required packages
-for package in required_packages:
-    try:
-        install_package(package)
-    except Exception as e:
-        print(f"Error installing {package}: {e}")
-
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
